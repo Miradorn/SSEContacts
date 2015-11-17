@@ -14,7 +14,7 @@ class RealmString : Object {
     dynamic var stringValue = ""
 }
 
-class Contact : Base, Mappable {
+class Contact : Object, Mappable {
     dynamic var category: Category?
     dynamic var name = ""
     dynamic var dateOfBirth = NSDate()
@@ -78,7 +78,14 @@ class Contact : Base, Mappable {
         dateOfBirth     <- map["dateOfBirth"]
     }
     
-    override func delete() -> Self {
+    // MARK: - accessors
+    
+    static func all() -> Results<Contact> {
+        let realm = try! Realm()
+        return realm.objects(Contact)
+    }
+    
+    func delete() -> Self {
         let realm = try! Realm()
         try! realm.write({
             realm.delete(self._backingAddresses)

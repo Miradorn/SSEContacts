@@ -19,7 +19,6 @@
 		FA70901B1BED397400F67838 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70901A1BED397400F67838 /* ContactImporter.swift */; };
 		FA70901E1BED3A5D00F67838 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70901C1BED3A5D00F67838 /* Category.swift */; };
 		FA70901F1BED3A5D00F67838 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA70901D1BED3A5D00F67838 /* Contact.swift */; };
-		FA7090211BED3CA900F67838 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7090201BED3CA900F67838 /* Base.swift */; };
 		FA7090231BED46A400F67838 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7090221BED46A400F67838 /* ContactDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +60,6 @@
 		FA70901A1BED397400F67838 /* ContactImporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactImporter.swift; sourceTree = "<group>"; };
 		FA70901C1BED3A5D00F67838 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		FA70901D1BED3A5D00F67838 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		FA7090201BED3CA900F67838 /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		FA7090221BED46A400F67838 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,7 +166,6 @@
 			children = (
 				FA70901C1BED3A5D00F67838 /* Category.swift */,
 				FA70901D1BED3A5D00F67838 /* Contact.swift */,
-				FA7090201BED3CA900F67838 /* Base.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -381,7 +378,6 @@
 				FA70901E1BED3A5D00F67838 /* Category.swift in Sources */,
 				FA708FEA1BED385C00F67838 /* CategoryViewController.swift in Sources */,
 				FA70901B1BED397400F67838 /* ContactImporter.swift in Sources */,
-				FA7090211BED3CA900F67838 /* Base.swift in Sources */,
 				FA7090231BED46A400F67838 /* ContactDetailViewController.swift in Sources */,
 				FA708FE81BED385C00F67838 /* AppDelegate.swift in Sources */,
 			);

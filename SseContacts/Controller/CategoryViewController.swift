@@ -8,12 +8,15 @@
 
 import UIKit
 import RealmSwift
+import ReactiveCocoa
 
 class CategoryViewController: UITableViewController {
     
     var detailViewController: ContactListViewController? = nil
     var categories = Category.all()
     
+    
+    @IBOutlet weak var searchField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +26,14 @@ class CategoryViewController: UITableViewController {
         let importButton = UIBarButtonItem(title: "Import", style: .Plain, target: self, action: "importContacts:")
         self.navigationItem.leftBarButtonItem = importButton
         
+        let searchStrings = searchField.rac_textSignal()
+            .toSignalProducer()
+            .map { text in text as! String }
         
-        
+        searchStrings.startWithNext({
+            self.categories = Category.filter($0);
+            self.tableView.reloadData()
+        })
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -80,7 +89,7 @@ class CategoryViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
         let category = categories[indexPath.row]
         cell.textLabel!.text = category.name
-        cell.detailTextLabel!.text = "Contacts: \(category.contacts.count)"
+        cell.detailTextLabel!.text = "\(category.color)"
         return cell
     }
     

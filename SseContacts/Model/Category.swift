@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 import RealmSwift
 
-class Category: Base, Mappable {
+class Category: Object, Mappable {
     dynamic var id = 0
     dynamic var name = ""
     dynamic var color = ""
@@ -36,7 +36,17 @@ class Category: Base, Mappable {
     
     // MARK: - accessors
     
-    override func delete() -> Self {
+    static func all() -> Results<Category> {
+        let realm = try! Realm()
+        return realm.objects(Category)
+    }
+    
+    static func filter(query: String) -> Results<Category> {
+        let realm = try! Realm()
+        return realm.objects(Category).filter("name CONTAINS[c] %@ OR color CONTAINS[c] %@", query, query)
+    }
+    
+    func delete() -> Self {
         let realm = try! Realm()
         try! realm.write({
             let _ = self.contacts.map({ (contact: Contact) -> Contact in
