@@ -47,16 +47,16 @@ class Category: Object, Mappable {
     }
     
     func delete() -> Self {
+        let _ = self.contacts.map({ (contact: Contact) -> Contact in
+            contact.delete()
+        })
+        
         let realm = try! Realm()
         try! realm.write({
-            let _ = self.contacts.map({ (contact: Contact) -> Contact in
-                contact.delete()
-            })
+            
             realm.delete(self)
         })
         return self
     }
-
-    
     
 }

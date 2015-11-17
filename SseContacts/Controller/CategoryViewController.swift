@@ -13,7 +13,7 @@ import ReactiveCocoa
 class CategoryViewController: UITableViewController {
     
     var detailViewController: ContactListViewController? = nil
-    var categories = Category.all()
+    var categories = MutableProperty<Results<Category>>(Category.all())
     
     
     @IBOutlet weak var searchField: UITextField!
@@ -30,8 +30,13 @@ class CategoryViewController: UITableViewController {
             .toSignalProducer()
             .map { text in text as! String }
         
-        searchStrings.startWithNext({
-            self.categories = Category.filter($0);
+        categories <~ searchStrings.map{
+                Category.filter($0)
+            }.flatMapError { _ in
+                SignalProducer.empty
+        }
+        
+        searchStrings.startWithNext({_ in
             self.tableView.reloadData()
         })
     }
@@ -56,7 +61,7 @@ class CategoryViewController: UITableViewController {
         let importer = ContactImporter()
         
         importer.importContacts({
-            self.categories = Category.all()
+            self.categories = MutableProperty<Results<Category>>(Category.all())
             self.tableView.reloadData()
         })
     }
@@ -66,7 +71,7 @@ class CategoryViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showContacts" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let category = categories[indexPath.row]
+                let category = categories.value[indexPath.row]
                 let controller = segue.destinationViewController as! ContactListViewController
                 controller.contacts = category.contacts
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
@@ -82,12 +87,12 @@ class CategoryViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categories.value.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
-        let category = categories[indexPath.row]
+        let category = categories.value[indexPath.row]
         cell.textLabel!.text = category.name
         cell.detailTextLabel!.text = "\(category.color)"
         return cell
@@ -100,7 +105,7 @@ class CategoryViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            categories[indexPath.row].delete()
+            categories.value[indexPath.row].delete()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
