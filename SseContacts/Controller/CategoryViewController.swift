@@ -12,37 +12,31 @@ import ReactiveCocoa
 
 class CategoryViewController: UITableViewController {
     
-    var detailViewController: ContactListViewController? = nil
-    var categories = MutableProperty<Results<Category>>(Category.all())
+    var categoriesViewModel: CategoriesViewModel! //MutableProperty<Results<Category>>(Category.all())
     
     
     @IBOutlet weak var searchField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+        updateCategoriesViewModel()
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         let importButton = UIBarButtonItem(title: "Import", style: .Plain, target: self, action: "importContacts:")
+
+        importButton.rac_enabled <~ ContactImporter.isImporting.producer.map{!$0}
         self.navigationItem.leftBarButtonItem = importButton
         
-        let searchStrings = searchField.rac_textSignal()
-            .toSignalProducer()
-            .map { text in text as! String }
-        
-        categories <~ searchStrings.map{
-                Category.filter($0)
-            }.flatMapError { _ in
-                SignalProducer.empty
-        }
-        
-        searchStrings.startWithNext({_ in
+        self.searchField.rac_textSignal().subscribeNext{ _ in
             self.tableView.reloadData()
-        })
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
-        //self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         tableView.reloadData()
         super.viewWillAppear(animated)
     }
@@ -54,16 +48,21 @@ class CategoryViewController: UITableViewController {
     
     
     func importContacts(sender: AnyObject) {
-        //        objects.insert(NSDate(), atIndex: 0)
-        //        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        //        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        
-        let importer = ContactImporter()
-        
-        importer.importContacts({
-            self.categories = MutableProperty<Results<Category>>(Category.all())
+        ContactImporter.importContacts(withCompletionHandler: {
+            self.updateCategoriesViewModel()
             self.tableView.reloadData()
         })
+    }
+    
+    private func updateCategoriesViewModel() {
+        let searchSignal: SignalProducer<String, NoError> = self.searchField.rac_textSignal()
+            .toSignalProducer().map{ query in
+                return query as! String
+            }.flatMapError{ error in
+                SignalProducer.empty
+        }
+        
+        categoriesViewModel = CategoriesViewModel(withSearchSignal: searchSignal)
     }
     
     // MARK: - Segues
@@ -71,9 +70,11 @@ class CategoryViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showContacts" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let category = categories.value[indexPath.row]
+                let categoryViewModel = categoriesViewModel[indexPath.row]
                 let controller = segue.destinationViewController as! ContactListViewController
-                controller.contacts = category.contacts
+                
+                controller.contacts = categoryViewModel.category.contacts //TODO Should take ViewModel
+                
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -87,14 +88,16 @@ class CategoryViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.value.count
+        return categoriesViewModel.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
-        let category = categories.value[indexPath.row]
-        cell.textLabel!.text = category.name
-        cell.detailTextLabel!.text = "\(category.color)"
+        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath) as! CategoryTableViewCell
+        
+        let categoryViewModel = categoriesViewModel[indexPath.row]
+        
+        categoryViewModel.cell = cell
+        
         return cell
     }
     
@@ -105,7 +108,7 @@ class CategoryViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            categories.value[indexPath.row].delete()
+            categoriesViewModel.deleteCategory(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.

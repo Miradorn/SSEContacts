@@ -11,44 +11,51 @@ import Alamofire
 import SwiftyJSON
 import ObjectMapper
 import RealmSwift
+import ReactiveCocoa
 
 class ContactImporter {
     
+    static let isImporting = MutableProperty<Bool>(false)
     
-    func importContacts(completionHandler: () -> ()) {
+    
+    class func importContacts(withCompletionHandler completionHandler: () -> ()) {
         
-            let realm = try! Realm()
-            try! realm.write {
-                realm.deleteAll()
-            }
+        isImporting.value = true
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
+        }
+        
+        Alamofire.request(.GET, "https://contactsampleprovider.herokuapp.com").responseJSON { response in
             
-            Alamofire.request(.GET, "https://contactsampleprovider.herokuapp.com").responseJSON { response in
-                
-                
-                let json = JSON(data: response.data!)
-                let categoriesJson = json["categories"]
-                let contactsJson = json["contacts"]
-                
-                
-                try! realm.write {
-                    for (_,categoryJson):(String, JSON) in categoriesJson {
-                        print(categoryJson.rawString()!)
-                        if let category = Mapper<Category>().map(categoryJson.rawString()!) {
-                            realm.add(category)
-                            
-                        }
+            
+            let json = JSON(data: response.data!)
+            let categoriesJson = json["categories"]
+            let contactsJson = json["contacts"]
+            
+            
+            try! realm.write {
+                for (_,categoryJson):(String, JSON) in categoriesJson {
+                    print(categoryJson.rawString()!)
+                    if let category = Mapper<Category>().map(categoryJson.rawString()!) {
+                        realm.add(category)
+                        
                     }
-                    for (_,contactJson):(String, JSON) in contactsJson {
-                        print(contactJson.rawString()!)
-                        if let contact = Mapper<Contact>().map(contactJson.rawString()!) {
-                            realm.add(contact)
-                            
-                        }
-                    }
-                    
-                    completionHandler()
                 }
+                for (_,contactJson):(String, JSON) in contactsJson {
+                    print(contactJson.rawString()!)
+                    if let contact = Mapper<Contact>().map(contactJson.rawString()!) {
+                        realm.add(contact)
+                        
+                    }
+                }
+                
+                completionHandler()
+                
+                isImporting.value = false
             }
+        }
         
     }
     

@@ -38,12 +38,12 @@ class Category: Object, Mappable {
     
     static func all() -> Results<Category> {
         let realm = try! Realm()
-        return realm.objects(Category)
+        return realm.objects(Category).sorted("name")
     }
     
     static func filter(query: String) -> Results<Category> {
         let realm = try! Realm()
-        return realm.objects(Category).filter("name CONTAINS[c] %@ OR color CONTAINS[c] %@", query, query)
+        return realm.objects(Category).filter("name CONTAINS[c] %@ OR color CONTAINS[c] %@", query, query).sorted("name")
     }
     
     func delete() -> Self {
