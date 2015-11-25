@@ -9,10 +9,10 @@
 import UIKit
 import ReactiveCocoa
 
-class CategoryViewModel {
+class ContactViewModel {
     
-    let category: Category
-    var cell: CategoryTableViewCell! {
+    let contact: Contact
+    var cell: ContactTableViewCell! {
         didSet {
             cell.textLabel!.rac_text <~ name
             cell.detailTextLabel!.rac_text <~ color
@@ -22,8 +22,8 @@ class CategoryViewModel {
     let name = MutableProperty<String>("")
     let color = MutableProperty<String>("")
     
-    init(withCategory category: Category) {
-        self.category = category
+    init(withContact contact: Contact) {
+        self.contact = contact
         self.name.value = category.name
         self.color.value = category.color
     }

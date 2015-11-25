@@ -85,6 +85,19 @@ class Contact : Object, Mappable {
         return realm.objects(Contact)
     }
     
+    static func withCategory(category: Category) -> Results<Contact> {
+        let realm = try! Realm()
+        return realm.objects(Contact).filter("category == %@", category)
+    }
+    
+    static func filter(query: String, category: Category) -> Results<Contact> {
+        let realm = try! Realm()
+        return realm.objects(Contact).filter("category.name CONTAINS[c] %@ OR category.color CONTAINS[c] %@" +
+            "or name CONTAINS[c] %@", query, query, query)
+            .filter("category == %@", category)
+            .sorted("name")
+    }
+    
     func delete() -> Self {
         let realm = try! Realm()
         try! realm.write({
