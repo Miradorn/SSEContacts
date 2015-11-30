@@ -25,29 +25,29 @@ class ContactsViewModel {
         contactViewModels = MutableProperty.init(allContactsViewModel)
         
         
-        let catViewModelProducer = searchSignal.map { query in
-            Contact.filter(query)
-            }.map { results in
-                results.map{ category in
-                    CategoryViewModel.init(withCategory: category)
+        let contactViewModelsProducer = searchSignal.map { query in
+            Contact.filter(query, category: category )
+        }.map { results in
+                results.map { contact in
+                    ContactViewModel.init(withContact: contact)
                 }
         }
-        categoryViewModels <~ catViewModelProducer
+        contactViewModels <~ contactViewModelsProducer
     }
     
-    subscript(index: Int) -> CategoryViewModel {
-        return categoryViewModels.value[index]
+    subscript(index: Int) -> ContactViewModel {
+        return contactViewModels.value[index]
     }
     
     var count: Int {
-        return categoryViewModels.value.count
+        return contactViewModels.value.count
     }
     
-    func deleteCategory(index: Int) {
-        let cat = self[index].category
+    func deleteContact(index: Int) {
+        let contact = self[index].contact
         
-        categoryViewModels.value.removeAtIndex(index)
+        contactViewModels.value.removeAtIndex(index)
         
-        cat.delete()
+        contact.delete()
     }
 }

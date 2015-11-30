@@ -14,26 +14,45 @@ class CategoryViewController: UITableViewController {
     
     var categoriesViewModel: CategoriesViewModel! //MutableProperty<Results<Category>>(Category.all())
     
+    var importCocoaAction: CocoaAction!
+    
+    var searchSignal: SignalProducer<String, NoError>!
+    
     
     @IBOutlet weak var searchField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        searchSignal = self.searchField.rac_textSignal()
+            .toSignalProducer().map{ query in
+                return query as! String
+            }.flatMapError{ error in
+                SignalProducer.empty
+        }
         
         updateCategoriesViewModel()
         
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        let importButton = UIBarButtonItem(title: "Import", style: .Plain, target: self, action: "importContacts:")
-
-        importButton.rac_enabled <~ ContactImporter.isImporting.producer.map{!$0}
+        let importAction =  Action<Bool, Void, NoError> { value in
+            return SignalProducer<Void, NoError> { observer, _ in
+                self.importContacts()
+                
+                observer.sendCompleted()
+            }
+        }
+        
+        importCocoaAction = CocoaAction(importAction, { _ in
+            true
+        })
+        
+        let importButton = UIBarButtonItem(title: "Import", style: .Plain, target: importCocoaAction, action: CocoaAction.selector)
+        importButton.rex_enabled <~ ContactImporter.noImportRunning
+        
         self.navigationItem.leftBarButtonItem = importButton
         
-        self.searchField.rac_textSignal().subscribeNext{ _ in
-            self.tableView.reloadData()
-        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,7 +66,7 @@ class CategoryViewController: UITableViewController {
     }
     
     
-    func importContacts(sender: AnyObject) {
+    func importContacts() {
         ContactImporter.importContacts(withCompletionHandler: {
             self.updateCategoriesViewModel()
             self.tableView.reloadData()
@@ -55,14 +74,10 @@ class CategoryViewController: UITableViewController {
     }
     
     private func updateCategoriesViewModel() {
-        let searchSignal: SignalProducer<String, NoError> = self.searchField.rac_textSignal()
-            .toSignalProducer().map{ query in
-                return query as! String
-            }.flatMapError{ error in
-                SignalProducer.empty
-        }
-        
         categoriesViewModel = CategoriesViewModel(withSearchSignal: searchSignal)
+        searchSignal.startWithNext{_ in
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Segues

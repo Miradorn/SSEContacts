@@ -14,8 +14,8 @@ class CategoryViewModel {
     let category: Category
     var cell: CategoryTableViewCell! {
         didSet {
-            cell.textLabel!.rac_text <~ name
-            cell.detailTextLabel!.rac_text <~ color
+            cell.textLabel!.rex_text <~ name
+            cell.detailTextLabel!.rex_text <~ color
         }
     }
     

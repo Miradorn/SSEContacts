@@ -8,6 +8,7 @@ target 'SseContacts' do
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Alamofire', '~> 3.0'
   pod 'AlamofireObjectMapper', '~> 2.0'
+  pod 'Rex', '0.9.0-alpha.3'
   pod 'RealmSwift'
 end
 

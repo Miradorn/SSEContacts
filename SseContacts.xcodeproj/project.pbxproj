@@ -11,6 +11,20 @@
 		FA2225D51BFDB8CC00E053CD /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2225D41BFDB8CC00E053CD /* CategoryTableViewCell.swift */; };
 		FA2225D91BFDBB0200E053CD /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2225D81BFDBB0200E053CD /* CategoryViewModel.swift */; };
 		FA2225DB1BFDBCFB00E053CD /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2225DA1BFDBCFB00E053CD /* CategoriesViewModel.swift */; };
+		FA5A1E641C06556000B2F95C /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E561C06556000B2F95C /* Action.swift */; };
+		FA5A1E651C06556000B2F95C /* Association.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E571C06556000B2F95C /* Association.swift */; };
+		FA5A1E661C06556000B2F95C /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E581C06556000B2F95C /* NSData.swift */; };
+		FA5A1E671C06556000B2F95C /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E591C06556000B2F95C /* NSObject.swift */; };
+		FA5A1E681C06556000B2F95C /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E5A1C06556000B2F95C /* NSUserDefaults.swift */; };
+		FA5A1E691C06556000B2F95C /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E5B1C06556000B2F95C /* Signal.swift */; };
+		FA5A1E6A1C06556000B2F95C /* SignalProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E5C1C06556000B2F95C /* SignalProducer.swift */; };
+		FA5A1E6B1C06556000B2F95C /* UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E5D1C06556000B2F95C /* UIBarButtonItem.swift */; };
+		FA5A1E6C1C06556000B2F95C /* UIBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E5E1C06556000B2F95C /* UIBarItem.swift */; };
+		FA5A1E6D1C06556000B2F95C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E5F1C06556000B2F95C /* UIButton.swift */; };
+		FA5A1E6E1C06556000B2F95C /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E601C06556000B2F95C /* UIControl.swift */; };
+		FA5A1E6F1C06556000B2F95C /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E611C06556000B2F95C /* UIImageView.swift */; };
+		FA5A1E701C06556000B2F95C /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E621C06556000B2F95C /* UILabel.swift */; };
+		FA5A1E711C06556000B2F95C /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5A1E631C06556000B2F95C /* UIView.swift */; };
 		FA6AE5BD1C05CF1F00E77B21 /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AE5BC1C05CF1F00E77B21 /* ContactsViewModel.swift */; };
 		FA6AE5BF1C05CF2800E77B21 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AE5BE1C05CF2800E77B21 /* ContactViewModel.swift */; };
 		FA6AE5C11C05CF8B00E77B21 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6AE5C01C05CF8B00E77B21 /* ContactTableViewCell.swift */; };
@@ -53,6 +67,20 @@
 		FA2225D41BFDB8CC00E053CD /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		FA2225D81BFDBB0200E053CD /* CategoryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		FA2225DA1BFDBCFB00E053CD /* CategoriesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
+		FA5A1E561C06556000B2F95C /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Action.swift; path = Rex/Action.swift; sourceTree = "<group>"; };
+		FA5A1E571C06556000B2F95C /* Association.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Association.swift; path = Rex/Association.swift; sourceTree = "<group>"; };
+		FA5A1E581C06556000B2F95C /* NSData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSData.swift; path = Rex/NSData.swift; sourceTree = "<group>"; };
+		FA5A1E591C06556000B2F95C /* NSObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSObject.swift; path = Rex/NSObject.swift; sourceTree = "<group>"; };
+		FA5A1E5A1C06556000B2F95C /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSUserDefaults.swift; path = Rex/NSUserDefaults.swift; sourceTree = "<group>"; };
+		FA5A1E5B1C06556000B2F95C /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Signal.swift; path = Rex/Signal.swift; sourceTree = "<group>"; };
+		FA5A1E5C1C06556000B2F95C /* SignalProducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignalProducer.swift; path = Rex/SignalProducer.swift; sourceTree = "<group>"; };
+		FA5A1E5D1C06556000B2F95C /* UIBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIBarButtonItem.swift; path = Rex/UIBarButtonItem.swift; sourceTree = "<group>"; };
+		FA5A1E5E1C06556000B2F95C /* UIBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIBarItem.swift; path = Rex/UIBarItem.swift; sourceTree = "<group>"; };
+		FA5A1E5F1C06556000B2F95C /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIButton.swift; path = Rex/UIButton.swift; sourceTree = "<group>"; };
+		FA5A1E601C06556000B2F95C /* UIControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIControl.swift; path = Rex/UIControl.swift; sourceTree = "<group>"; };
+		FA5A1E611C06556000B2F95C /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageView.swift; path = Rex/UIImageView.swift; sourceTree = "<group>"; };
+		FA5A1E621C06556000B2F95C /* UILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILabel.swift; path = Rex/UILabel.swift; sourceTree = "<group>"; };
+		FA5A1E631C06556000B2F95C /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = Rex/UIView.swift; sourceTree = "<group>"; };
 		FA6AE5BC1C05CF1F00E77B21 /* ContactsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
 		FA6AE5BE1C05CF2800E77B21 /* ContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		FA6AE5C01C05CF8B00E77B21 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
@@ -140,6 +168,27 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		FA5A1E551C0654E100B2F95C /* Rex */ = {
+			isa = PBXGroup;
+			children = (
+				FA5A1E561C06556000B2F95C /* Action.swift */,
+				FA5A1E571C06556000B2F95C /* Association.swift */,
+				FA5A1E581C06556000B2F95C /* NSData.swift */,
+				FA5A1E591C06556000B2F95C /* NSObject.swift */,
+				FA5A1E5A1C06556000B2F95C /* NSUserDefaults.swift */,
+				FA5A1E5B1C06556000B2F95C /* Signal.swift */,
+				FA5A1E5C1C06556000B2F95C /* SignalProducer.swift */,
+				FA5A1E5D1C06556000B2F95C /* UIBarButtonItem.swift */,
+				FA5A1E5E1C06556000B2F95C /* UIBarItem.swift */,
+				FA5A1E5F1C06556000B2F95C /* UIButton.swift */,
+				FA5A1E601C06556000B2F95C /* UIControl.swift */,
+				FA5A1E611C06556000B2F95C /* UIImageView.swift */,
+				FA5A1E621C06556000B2F95C /* UILabel.swift */,
+				FA5A1E631C06556000B2F95C /* UIView.swift */,
+			);
+			name = Rex;
+			sourceTree = "<group>";
+		};
 		FA708FDB1BED385C00F67838 = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +270,7 @@
 			children = (
 				FA70901A1BED397400F67838 /* ContactImporter.swift */,
 				FAA283221BFF7890006B6586 /* UIKitExtension.swift */,
+				FA5A1E551C0654E100B2F95C /* Rex */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -411,18 +461,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA70901F1BED3A5D00F67838 /* Contact.swift in Sources */,
+				FA5A1E691C06556000B2F95C /* Signal.swift in Sources */,
 				FA6AE5BD1C05CF1F00E77B21 /* ContactsViewModel.swift in Sources */,
 				FA708FEC1BED385C00F67838 /* ContactListViewController.swift in Sources */,
+				FA5A1E701C06556000B2F95C /* UILabel.swift in Sources */,
+				FA5A1E671C06556000B2F95C /* NSObject.swift in Sources */,
 				FA2225DB1BFDBCFB00E053CD /* CategoriesViewModel.swift in Sources */,
 				FA6AE5C11C05CF8B00E77B21 /* ContactTableViewCell.swift in Sources */,
 				FA70901E1BED3A5D00F67838 /* Category.swift in Sources */,
+				FA5A1E6C1C06556000B2F95C /* UIBarItem.swift in Sources */,
+				FA5A1E6A1C06556000B2F95C /* SignalProducer.swift in Sources */,
 				FA708FEA1BED385C00F67838 /* CategoryViewController.swift in Sources */,
+				FA5A1E6D1C06556000B2F95C /* UIButton.swift in Sources */,
 				FA70901B1BED397400F67838 /* ContactImporter.swift in Sources */,
 				FA7090231BED46A400F67838 /* ContactDetailViewController.swift in Sources */,
+				FA5A1E651C06556000B2F95C /* Association.swift in Sources */,
 				FA708FE81BED385C00F67838 /* AppDelegate.swift in Sources */,
+				FA5A1E6F1C06556000B2F95C /* UIImageView.swift in Sources */,
 				FA2225D91BFDBB0200E053CD /* CategoryViewModel.swift in Sources */,
 				FAA283231BFF7890006B6586 /* UIKitExtension.swift in Sources */,
+				FA5A1E681C06556000B2F95C /* NSUserDefaults.swift in Sources */,
 				FA2225D51BFDB8CC00E053CD /* CategoryTableViewCell.swift in Sources */,
+				FA5A1E6B1C06556000B2F95C /* UIBarButtonItem.swift in Sources */,
+				FA5A1E6E1C06556000B2F95C /* UIControl.swift in Sources */,
+				FA5A1E711C06556000B2F95C /* UIView.swift in Sources */,
+				FA5A1E661C06556000B2F95C /* NSData.swift in Sources */,
+				FA5A1E641C06556000B2F95C /* Action.swift in Sources */,
 				FA6AE5BF1C05CF2800E77B21 /* ContactViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

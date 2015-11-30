@@ -15,12 +15,12 @@ import ReactiveCocoa
 
 class ContactImporter {
     
-    static let isImporting = MutableProperty<Bool>(false)
+    static let noImportRunning = MutableProperty<Bool>(true)
     
     
     class func importContacts(withCompletionHandler completionHandler: () -> ()) {
         
-        isImporting.value = true
+        noImportRunning.value = false
         
         let realm = try! Realm()
         try! realm.write {
@@ -51,10 +51,10 @@ class ContactImporter {
                     }
                 }
                 
-                completionHandler()
-                
-                isImporting.value = false
             }
+            
+            completionHandler()
+            noImportRunning.value = true
         }
         
     }
