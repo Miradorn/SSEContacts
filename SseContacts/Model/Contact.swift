@@ -70,7 +70,7 @@ class Contact : Object, Mappable {
                 value!.id
         })
         
-        category        <- (map["categorie"], categoryTransform)
+        category        <- (map["category"], categoryTransform)
         name            <- map["name"]
         addresses       <- map["addresses"]
         phones          <- map["phones"]
